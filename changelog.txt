@@ -1,0 +1,173 @@
+Framework::Apex
+CHANGELOG:
+
+VERSION 1.4 build 13
+* lib('user')->destroy() improvements
+
+VERSION 1.4 build 12
+* lib('user')->destroy() now does a more complete job in expunging all user data from cookie and session
+
+VERSION 1.4 build 11
+* core function 'array_to_object' is now recursive.
+
+VERSION 1.4 build 10
+* overhauled the lib db return object. count has been implemented using sql count, much faster, thanks efraim (also, thanks, danny, for raising the flag on this one). the row object is still implemented as it was before, which means, that using 'limit 1' is a good idea for large tables. if you do not use 'limit', the row command generates the whole recordset and 'pops' a new row on every iteration of the row() function.
+
+VERSION 1.4 build 9
+* minor removal of some test code
+
+VERSION 1.4 build 8
+* major fixes in lib('db')
+
+VERSION 1.4 build 7
+* modules list moved to lib('config')
+* encryption key replaced
+
+VERSION 1.4 build 6
+* lib('user') destructor now deprecated. functionality implemented using hooks
+* the 'hook' function now also runs the function 'hook_<hookname>()' on all loaded libs, this behaviour is designed to eventually substitute all __construct() __destruct() calls - and later-on, to allow the 'observer' design-pattern to be implemented in apex apps.
+
+VERSION 1.4 build 5
+* permanent fix for lib->user multiple cookies on perpetuate
+
+VERSION 1.4 build 4
+* added 'uploads' folder at the root of the application, this folder is available through normal http request and does not go through the framework, similar to the 'resources' folder.
+* default upload path in repeater is now '/uploads'
+* lib/thumbs now ignores the extention's case jpg, JPG, and jPg are all the same
+
+VERSION: 1.4 build 3
+* lib->uri & lib->config modified to support url triggers
+* lib->config & lib->hooks removed from sys folder
+* $url_triggers & $url_triggers_exceptions added to lib->config
+NOTE: triggers and exception features not extensively tested, and may contain hidden bugs, by default they are disabled, so no new problems should arise if you straight-up upgrade the framework without enabling the feature.
+
+VERSION: 1.4 build 2
+* lib->uri modified to support controllers in modules
+
+VERSION: 1.4 build 1
+* base_model now contains the function row(), similar to where()
+* modules now supprted: app now contains a 'modules' folder, under which complete 'app' directories can be placed, when accessing any file, the framework will look for it in app, then in the modules and then in sys, core contains an autoloader for modules, which may be bypassed (in the mater index.php) for sorting modules and improving performance
+* lib('db') now using redbean version 2.0.1, old lib('db') deprecated but not removed, will be removed in later builds.
+* 'resources' folders may now be placed anywhere throughout the application.
+* fixed single/multiple checkbox bug (finally) when naming a field with [] at the end, the repeater now treats it as a multi checkbox, even if there is only a singlr instance of it.
+
+VERSION: 1.3 build 12
+* in the repeater, r_delete links may now be added to forms
+
+VERSION: 1.3 build 11
+* repeater now works with uid rather than id
+* base_model fix to by_uid function (thanks, zion)
+
+VERSION: 1.3 build 10
+in the repeater, you may now define <add> and <modify> tags in the form, that will only be displayed in the appropriate state.
+
+VERSION: 1.3 build 9
+lib('thumb') now renders transparent png background as white instead of black. full transparency is planned.
+
+VERSION: 1.3 build 8
+* dispensed beans now automatically have a uid field.
+* when instantiating a model, you may extend base_model to get the methods: by_id($integer), by_uid($string), where($where_sql) - credit: zion ben-yakov
+* model wrapper now generates the table-name automatically and injects it to the inner object, for use with the base_model functions. - credit: zion ben-yakov
+* sys/prototypes/base_model.php added - credit: zion ben-yakov
+* note: due to a quirk, by_id will not work in sqlite.
+
+VERSION: 1.3 build 7
+helpers introduced: you may now hold a file in the folder 'helpers' with global scope functions in it. function can be called in the following manner F::filename_functionname(), if you choose to work differently, and declare the helper in advance, you can do that with F::filename() and then call the functions using functionname() normally.
+
+VERSION: 1.3 build 6
+bug fix to repeater
+
+VERSION: 1.3 build 5
+repeater now supports paging, see sample in sys/prototype/repeater.php
+
+VERSION: 1.3 build 4
+multiple changes in ui/repeater and prototypes/repeater:
+1. now supports hidden form fields (thanks to Danny Wainshtein).
+2. it's now possible to prefix a form field name with an underscore to declare that it will not be inserted into the database on submit.
+3. fixed several issues with the multiple chackbox.
+4. removed debug 'die()' in validation upon insert, which was distributed by error.
+
+
+VERSION: 1.3 build 3
+core.php - view function now doesn't require an arguments array
+sys/libs/html - formatted the auto function output
+sys/libs/page - setting lib('page')->skin to "" now renders the view, no need for an 'ajax.php' skin
+sys/prototypes/repeater - setting the functions is no longer required
+sys/uis/repeater - if not set, binding defaults to the repeater ID field
+sys/libs/thumb - added (contributed by Zion Ben Yakov).
+resources/media/default_image.jpg - added
+
+
+VERSION: 1.3 build 2
+Fixed an error in the repeater file handler, so that if no file is uploaded it leaves the filename field blank
+
+VERSION: 1.3 build 1
+
+* form and grid UI are now deprecated, repeater UI now covers all scaffolding needs,
+  usage sample exists in sys/prototypes/repeater
+
+* apex now has a view function similar to codeigniter load->view
+
+sys/core new functions - view & object_to_array
+removed: invalid <pre> tag at the end of the default skin
+removed: ie compatibility tag + imagetoolbar tag in default skin
+added: calls to lib('html') in default skin
+added: google cdn for html5shim + less.js
+added sys/libs/fs
+added sys/libs/html
+added sys/controllers/api
+added sys/uis/repeater
+added sys/prototyps/repeater
+removed sys/libs/validator
+removed sys/uis/grid
+removed sys/uis/form
+
+
+
+VERSION: 1.2 build 20
+small change to prototypes/model.php due to an error in file creation
+
+VERSION: 1.2 build 19
+replaced libs/app - instead of using a seralized array(uneditable) it now uses xml(editable) - xml is created in root of application
+
+VERSION: 1.2 build 18
+1) the property 'cachename' may now be set for models and the cache will be save by that name, later, it is possible to call a 'destroy(cachename)' method on the model, which will will the named cache. this method accepts wildcards.
+2) both model and fragment cache now allow a path to be provided (ie: foo/bar/mama/papa/cachename) and will auto generate the path as needed.
+3) issues: path is not destroyed automatically when it's content is gone
+4) tested, but not deeply, be on the lookout for bugs in these features, please
+
+VERSION: 1.2 build 17
+rollback of magic quotes feature in htaccess, as it was deprecated in php5
+
+VERSION: 1.2 build 16
+magic quotes turned off by default in .htaccess
+
+VERSION: 1.2 build 15
+bug fix to ui/form checkbox
+
+VERSION: 1.2 build 14
+corrections to lib('app').
+
+VERSION: 1.2 build 13
+additions to lib('app'). you can now set lib('app')->foo = 'bar' and this data will persist throughout the application, use for counters, settings, etc.
+
+VERSION: 1.2 build 12
+
+1) filename changed from distribution.txt to changelog.txt
+2) .htaccess file modified to disable directory browsing
+
+
+VERSION: 1.2 build 11
+
+modified: core.php, full page cache now reads the cache and displays it. previous behaviour: full page caches were executed via include.
+
+
+VERSION: 1.2 build 10
+
+modified: core.php function ui() - to allow multiple ui objects of the same type, previous behaviour attempted to re-include class definitions, because it is the only call to flexiloader() that isn't routed through Apexs' singleton mechanism. flexiloader() is still allowed to include rather than include_once.
+
+VERSION: 1.2 build 9
+
+libs/user.php - will now hide the error message that is displayed when unserialize fails due to changing the encryption key.
+
+uis/grid.php - some changes in the way the [add] link is displayed, also now hides the header of the table when it is empty
