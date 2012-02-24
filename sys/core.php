@@ -10,6 +10,7 @@ class apex{
     public static $expires = 0;
     public static $event_log = array();
     public static $modules = null;
+	public static $rendered;
 
     public static function lib($libname){return self::loader('lib', $libname);}
     public static function model($modelname){return self::loader('model', $modelname, 'model');}
@@ -69,9 +70,10 @@ class apex{
         $mem = floor((memory_get_usage()/1024/1024)*1000)/1000;
         $peakmem = floor((memory_get_peak_usage()/1024/1024)*1000)/1000;
         $rendered = str_replace(array('{elapsed_time}','{mem_usage}'),array($timer.' Sec', $mem.'Mb ('.$peakmem.'Mb)'),$page_render);
-		
+	
+	self::$rendered = $rendered;
 	hook('before_display');
-	print $rendered;
+	print self::$rendered;
 	hook('after_display');
 	
 	if(@$_GET['debug']==true){
