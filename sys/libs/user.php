@@ -20,7 +20,7 @@ class user_lib{
 				}
             }else{
                 $this->cookie = array();
-            }
+            } 
 		}
         $rt = @$this->cookie[$name];
 		//$this->perpetuate();
