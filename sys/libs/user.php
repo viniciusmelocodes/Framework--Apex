@@ -13,7 +13,8 @@ class user_lib{
 		if($this->cookie==null){
             if(isset($_COOKIE[lib('config')->user_lib_cookie])){
 				try{
-					$this->cookie = unserialize(lib('encryption')->decrypt($_COOKIE[lib('config')->user_lib_cookie]));
+					$this->cookie = @unserialize(lib('encryption')->decrypt($_COOKIE[lib('config')->user_lib_cookie]));
+					if($this->cookie == '') $this->cookie = array();
 				}catch(Exception $e){
 					$this->cookie = array();
 				}
@@ -58,7 +59,7 @@ class user_lib{
 		@session_destroy();
     }
 
-    function hook_after_display(){
+    function hook_before_display(){
 	$this->perpetuate();
     }
 
