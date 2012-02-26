@@ -4,7 +4,6 @@ class user_lib{
 	private $cookie=null;
 
     function __construct(){
-		//
 		session_start();
         $this->current_growl = @$_SESSION['growl'];
         $_SESSION['growl'] = '';
