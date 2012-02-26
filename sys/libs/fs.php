@@ -13,6 +13,7 @@ class fs_lib{
             }
             closedir($handle);
         }
+        sort($rt);
         return $rt;
     }
 }
