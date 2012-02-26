@@ -9,7 +9,7 @@ class user_lib{
         $_SESSION['growl'] = '';
     }
     
-    function __get($name){
+	function _assert_cookie(){
 		if($this->cookie==null){
             if(isset($_COOKIE[lib('config')->user_lib_cookie])){
 				try{
@@ -22,12 +22,17 @@ class user_lib{
                 $this->cookie = array();
             } 
 		}
+	}
+	
+    function __get($name){
+		$this->_assert_cookie();
         $rt = @$this->cookie[$name];
 		//$this->perpetuate();
         return $rt;
     }
     
 	function array_set($obj){
+		$this->_assert_cookie();
 		foreach($obj as $key=>$item){
 			$this->$key = $item;
 		}
@@ -35,6 +40,7 @@ class user_lib{
 	}
 	
     function __set($name, $value){
+		$this->_assert_cookie();
 		$this->cookie[$name] = $value;
 		//$this->perpetuate();
     }
