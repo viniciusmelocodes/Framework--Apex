@@ -12,7 +12,12 @@ class config_lib{
     public $views_directory_suffix = '.views';
     public $user_lib_cookie = 'apex';
 
-    public $encryption_key = 'Gr50yEm.uE6uOnhD[&pJ8!%KiR|NCe>4';
+    function __construct(){
+        if(lib('app')->encryption_key == ''){
+            lib('app')->encryption_key = $key = rand_string(32);
+        }
+        $this->encryption_key = lib('app')->encryption_key;
+    }
     
     // to hard code module loading (and order), use the following line:
     // apex::$modules = array(APP, APP.'/modules/<module_name>', SYS);
