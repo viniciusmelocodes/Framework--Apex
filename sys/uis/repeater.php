@@ -319,6 +319,8 @@ class repeater_ui{
                                 // handle single checkboxes
                                 if( @$array[$field->name] ){
                                     $field->checked = 'checked';
+                                }else{
+                                    $field->checked = null;
                                 }
                             }
                             break;
