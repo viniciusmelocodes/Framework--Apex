@@ -27,7 +27,13 @@ class html_lib{
     
     function generate_tag($full_path){
         $file = basename($full_path);
-        @list($filename, $extention) = explode('.',$file);
+        //@list($filename, $extention) = explode('.',$file);
+        $explode = explode('.',$file);
+        $extention = array_pop($explode);
+        $filename = implode('.',$explode);
+        
+        if($filename[0]=='_')return;
+        
         switch($extention){
             case 'js':
                 ?>
