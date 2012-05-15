@@ -57,9 +57,9 @@ class uri_lib{
 		$home = lib('config')->home_controller;
 		
 		$this->uri = str_replace($this->base_url,'',$this->_selfURL());
-		$this->uri = explode('?',$this->uri);
-		$this->uri = $this->uri[0];
-		@$this->querystring = $this->uri[1];
+		$exploded = explode('?',$this->uri);
+		$this->uri = $exploded[0];
+		@$this->querystring = $exploded[1];
 
 		$this->uri = explode('/',$this->uri);
 
