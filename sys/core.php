@@ -38,17 +38,24 @@ class apex{
 		if($page_render == ''){
 			hook('rendering_page');
 			lib('user');
-			$controller_path = lib('uri')->controllerPath;
-			$controller_name = lib('uri')->controller;
-			$method_name = lib('uri')->method;
-			self::$controller = self::loader('controller',$controller_path);
-	
-			if(method_exists(self::$controller, $method_name)){
-				call_user_func_array(array(self::$controller, $method_name), lib('uri')->args);
-			}elseif(method_exists(self::$controller, '_default')){
-				array_unshift(lib('uri')->args,$method_name);
-				call_user_func_array(array(self::$controller, '_default'), lib('uri')->args);
+			
+			if (lib('uri')->show404==false){
+			
+				$controller_path = lib('uri')->controllerPath;
+				$controller_name = lib('uri')->controller;
+				$method_name = lib('uri')->method;
+				self::$controller = self::loader('controller',$controller_path);
+		
+				if(method_exists(self::$controller, $method_name)){
+					call_user_func_array(array(self::$controller, $method_name), lib('uri')->args);
+				}elseif(method_exists(self::$controller, '_default')){
+					array_unshift(lib('uri')->args,$method_name);
+					call_user_func_array(array(self::$controller, '_default'), lib('uri')->args);
+				}else{
+					self::show404();
+				}
 			}else{
+				// lib uri did not locate a controller
 				self::show404();
 			}
 	

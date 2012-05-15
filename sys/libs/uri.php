@@ -10,6 +10,8 @@ class uri_lib{
 	public $base_url;
 	public $domain;
 	
+	public $show404 = false;
+	
 	function here(){
 		return $this->basePath.$this->controller.'/'.$this->method.'/';
 	}
@@ -35,7 +37,7 @@ class uri_lib{
 			}
 		}
 
-		if($finished!=true){apex::show404();}
+		if($finished!=true){$this->show404=true;return;}//apex::show404();
 		
 		$this->controllerPath = $path;
 		$this->basePath = $segments; array_pop($this->basePath); $this->basePath = implode('/',$this->basePath);if($this->basePath!=''){$this->basePath.='/';}
@@ -72,7 +74,8 @@ class uri_lib{
 					if($value!=null){
 						$trigger_value = $value;
 					}else{
-						apex::show404();
+						$this->show404 = true;
+						//apex::show404();
 					}
 				}
 				define ( $key, $trigger_value );
