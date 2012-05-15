@@ -61,7 +61,7 @@ class db_lib{
     }
 
     function exec($sql){return R::exec($sql);}
-    function get($sql){return R::get($sql);}
+    function get($sql){return R::getAll($sql);}
     function trash($obj){return R::trash($obj);}
     function destroy($obj){/*this function is an alias of the 'trash' function, for convenience only*/return $this->trash($obj);}
     function load($type,$id){
