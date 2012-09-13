@@ -3,12 +3,11 @@
   <head>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
-    <meta name="copyright" content=""/>
     <meta name="author" content=""/>
     <meta name="robots" content=""/>
     <base href="<?=lib('uri')->base_url?>"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="generator" content="Framework::Apex v1.3"/>
+    <meta name="generator" content="Framework::Apex v1.4"/>
 
     <? lib('html')->auto('js'); ?>
 

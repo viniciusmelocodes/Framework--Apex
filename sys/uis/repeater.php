@@ -10,8 +10,8 @@ class repeater_ui{
         $this->logic = lib('page')->data[$this->id];
         if( !isset($this->logic->binding) ) $this->logic->binding = $this->logic->id;
         
-        $state = @lib('uri')->segment ( sizeof( explode('/',$this->logic->base) ) );
-        $item_id = @lib('uri')->segment ( sizeof( explode('/',$this->logic->base) ) +1 );
+        $state = @lib('uri')->segment ( sizeof( explode('/',$this->logic->base) ) -  $this->logic->offset );
+        $item_id = @lib('uri')->segment ( sizeof( explode('/',$this->logic->base) ) - $this->logic->offset +1 );
         $item_obj = lib('db')->find($this->logic->binding, 'uid="'.$item_id.'"')->row();
 
 
@@ -142,7 +142,7 @@ class repeater_ui{
                         if(isset($this->logic->callback)){
                             $insert = $this->logic->callback($insert);
                         }
-                        $insert->uid = strtolower(rand_string(16));
+                        //$insert->uid = strtolower(rand_string(16));
                         if($insert){
                             lib('db')->store($insert);
                         }

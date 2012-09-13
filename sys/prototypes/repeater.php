@@ -111,6 +111,7 @@ class repeater{
     public $id;
     public $conditional=array();
     public $upload_path = 'uploads';
+	public $offset = 0;
     
     function __construct($id){
         $this->id = $id;
