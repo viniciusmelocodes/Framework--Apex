@@ -293,42 +293,44 @@ class repeater_ui{
         foreach( $form->find('input,textarea,select') as $field){
             switch( $field->tag ){
                 case 'input':
-                    switch( $field->type ){
-                        case 'text':
-                        case 'hidden':
-                        case '':
-                            $field->value = @$array[$field->name];
-                            break;
-                        case 'checkbox':
-                            if( substr($field->name, -2)=='[]' || sizeof($form->find('[name='.$field->name.']')) > 1 ){
-                                // handle multiple checkboxes
-                                $name_in_array = str_replace('[]','',$field->name);
-
-                                if(is_string(@$array[$name_in_array])){
-                                    $multiple_values = @explode(',',$array[$name_in_array]);
-                                    if(is_string($multiple_values)) $multiple_values = array($multiple_values);
+                    if( $field->name[0]!='_' ){
+                        switch( $field->type ){
+                            case 'text':
+                            case 'hidden':
+                            case '':
+                                $field->value = @$array[$field->name];
+                                break;
+                            case 'checkbox':
+                                if( substr($field->name, -2)=='[]' || sizeof($form->find('[name='.$field->name.']')) > 1 ){
+                                    // handle multiple checkboxes
+                                    $name_in_array = str_replace('[]','',$field->name);
+    
+                                    if(is_string(@$array[$name_in_array])){
+                                        $multiple_values = @explode(',',$array[$name_in_array]);
+                                        if(is_string($multiple_values)) $multiple_values = array($multiple_values);
+                                    }else{
+                                        $multiple_values = @$array[$name_in_array];
+                                    }
+    
+                                    if(!$multiple_values)$multiple_values=array();
+                                    if (in_array($field->value,$multiple_values)){
+                                        $field->checked = 'checked';
+                                    }
                                 }else{
-                                    $multiple_values = @$array[$name_in_array];
+                                    // handle single checkboxes
+                                    if( @$array[$field->name] ){
+                                        $field->checked = 'checked';
+                                    }else{
+                                        $field->checked = null;
+                                    }
                                 }
-
-                                if(!$multiple_values)$multiple_values=array();
-                                if (in_array($field->value,$multiple_values)){
+                                break;
+                            case 'radio':
+                                if( $field->value == @$array[$field->name] ){
                                     $field->checked = 'checked';
                                 }
-                            }else{
-                                // handle single checkboxes
-                                if( @$array[$field->name] ){
-                                    $field->checked = 'checked';
-                                }else{
-                                    $field->checked = null;
-                                }
-                            }
-                            break;
-                        case 'radio':
-                            if( $field->value == @$array[$field->name] ){
-                                $field->checked = 'checked';
-                            }
-                            break;
+                                break;
+                        }
                     }
                     break;
                 case 'textarea':
