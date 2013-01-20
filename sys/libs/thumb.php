@@ -1,8 +1,66 @@
 <?
 class thumb_lib
 {
-        // resize the orig image to the requested proportions according to the bigget
-        // width / height, then corppoing the new image from the center 
+        function get_scaled($path, $req_W, $req_H, $quality=85, $monochrome=false){
+                if ( !file_exists($path) || is_dir($path) ) {
+                        $path = 'resources/media/default_image.jpg';
+                }
+                $ext = explode('.',$path);
+                $ext = array_pop($ext);
+
+                $thumb_path = $path.'.thumbs/';
+
+                if(!is_dir($thumb_path)){
+                        mkdir($thumb_path);
+                }
+                
+                $thumb_path = $thumb_path.$req_W.'x'.$req_H.'.scaled_to_fit.jpg';
+
+
+                if(!file_exists ($thumb_path)){
+                        switch(strtolower($ext)){
+                                case"jpg":
+                                        $image = imagecreatefromjpeg($path);
+                                        break;
+                                case"png":
+                                        $image = imagecreatefrompng($path);
+                                        break;
+                                case"gif":
+                                        $image = imagecreatefromgif($path);
+                                        break;
+                        }
+
+
+                        // Target dimensions
+                        $max_width = $req_W;
+                        $max_height = $req_H;
+                        
+                        // Get current dimensions
+                        $old_width  = imagesx($image);
+                        $old_height = imagesy($image);
+                        
+                        // Calculate the scaling we need to do to fit the image inside our frame
+                        $scale      = min($max_width/$old_width, $max_height/$old_height);
+                        
+                        // Get the new dimensions
+                        $new_width  = ceil($scale*$old_width);
+                        $new_height = ceil($scale*$old_height);
+                        
+                        // Create new empty image
+                        $new = imagecreatetruecolor($new_width, $new_height);
+                        
+                        // Resize old image into new
+                        imagecopyresampled($new, $image, 
+                            0, 0, 0, 0, 
+                            $new_width, $new_height, $old_width, $old_height);
+                        imagejpeg($new, $thumb_path, $quality);
+                }
+                return $thumb_path;
+
+        }
+        
+        // resize the original image to the requested proportions according to the bigget
+        // width / height, then cropping the new image from the center 
         // according to the requested sizes and saving the image
         // credit: Zion Ben Yaakov
         function get($path,$req_W, $req_H, $quality=85, $monochrome=false){
