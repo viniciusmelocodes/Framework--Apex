@@ -42,12 +42,12 @@ class html_lib{
                 break;
             case 'css':
                 ?>
-        <link href="<?=$full_path?>" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?=$full_path?>" media="screen, print" rel="stylesheet" type="text/css" />
 <?
                 break;
             case 'less':
                 ?>
-        <link rel="stylesheet/less" href="<?=$full_path?>" type="text/css" media="screen"/>
+        <link rel="stylesheet/less" href="<?=$full_path?>" type="text/css" media="screen, print"/>
 <?
                 break;
         }
