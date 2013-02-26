@@ -7,7 +7,7 @@ class html_lib{
         foreach( lib('fs')->dir("resources/$resources_folder") as $file){
             $full_path = "resources/$resources_folder/$file";
             $this->generate_tag($full_path);
-        }
+        } 
         
         foreach(array('js','css','less') as $filetype){
             $full_path = "resources/$resources_folder/controllers/".lib('uri')->segment(0).'.'.$filetype;
