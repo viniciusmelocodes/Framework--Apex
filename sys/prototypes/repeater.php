@@ -28,6 +28,7 @@ IN CONTROLLER:
         $lala->add_permissions =  function(){ return true; };
         $lala->modify_permissions = function($obj){ return ($obj->gender==2); };
         $lala->delete_permissions = function($obj){ return !($obj->is_cool); };
+        $lala->before_delete = function($obj){ return $obj; };
 
 ================================================================================
 IN VIEW:
