@@ -202,7 +202,7 @@ class repeater_ui{
                             
                         }
                     }
-                }
+                } 
                 break;
             
             case 'delete':
