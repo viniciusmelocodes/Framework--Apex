@@ -207,8 +207,9 @@ class repeater_ui{
             
             case 'delete':
                 if ( !$this->logic->delete_permissions($item_obj) ){return;}
-                $item_obj = $this->logic->before_delete($item_obj);
-                lib('db')->destroy($item_obj);
+                if(isset($this->logic->before_delete)){
+                    $item_obj = $this->logic->before_delete($item_obj);
+                }                lib('db')->destroy($item_obj);
                 redirect($this->logic->base);
                 break;
 
