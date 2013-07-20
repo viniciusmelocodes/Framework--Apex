@@ -168,8 +168,16 @@ function view( $view, $params=array(), $return=false ){
 
 
 function __autoload($className){
-    // bypass REDBEAN's new stupid-ass FUSE architecture
-    if ( substr($className,0,6 ) == 'Model_') return false;
+    if ( substr($className,0,6 ) == 'Model_'){
+		$nm = strtolower(substr($className,6));
+		if(!file_exists(flexiPath('fuses/'.$nm.'.php'))){
+			eval("class $className extends fuse{};");
+			return false;
+		}else{
+			flexiLoader('fuse',$nm);
+			return true;
+		}
+	}
 
     if(!flexiLoader('prototype', $className)){
 	    $trc = debug_backtrace();

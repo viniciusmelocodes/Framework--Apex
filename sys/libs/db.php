@@ -1,7 +1,7 @@
 <?
 class db_lib{
     function __construct(){
-        include('db/2.0.1/rb.php');
+        include('db/3.4.7/rb.php');
 
         $cfg = lib('config')->db;
 
