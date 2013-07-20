@@ -9,9 +9,10 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="generator" content="Framework::Apex v1.4"/>
 
-    <? lib('html')->auto('js'); ?>
 
     <? lib('html')->auto('css'); ?>
+
+    <? lib('html')->auto('js'); ?>
 
     <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -19,8 +20,6 @@
       $(document).ready(function(){
       });
     </script>
-
-    <script src="http://lesscss.googlecode.com/files/less-1.1.3.min.js"></script>
 
     <title></title>
   </head>
