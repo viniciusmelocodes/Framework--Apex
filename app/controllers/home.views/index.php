@@ -2,5 +2,3 @@
 <p><b>controller</b> - app/controllers/home.php</p>
 <p><b>view</b> - app/controllers/home.views/index.php</p>
 <p><b>skin</b> - skins/default.php</p>
-<?
-$q = R::dispense('x');
