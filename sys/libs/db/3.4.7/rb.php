@@ -1,7 +1,7 @@
 <?php 
 /**
 REDBEANPHP 3.4
---------------
+-------------- 
 RedBeanPHP Database Objects -
 Written by Gabor de Mooij (c) copyright 2009-2013 and the RedBeanPHP community 
 RedBeanPHP is DUAL Licensed BSD and GPLv2. You may choose the license that fits

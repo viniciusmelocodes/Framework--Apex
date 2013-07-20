@@ -1,7 +1,7 @@
 <?
 class fuse extends RedBean_SimpleModel{
     private $new_bean = false;
-
+ 
     function open(){}
 
     function dispense(){

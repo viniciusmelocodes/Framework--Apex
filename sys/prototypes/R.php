@@ -1,7 +1,7 @@
 <?
 require_once SYS."/libs/db/3.4.7/rb.php";
 initialize_database();
-
+ 
 function initialize_database(){
 	//http://forums.hostgator.com/mysql-password-hashing-php-5-2-t117816.html
 	$cfg = lib('config')->db;
