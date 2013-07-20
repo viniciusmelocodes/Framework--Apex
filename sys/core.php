@@ -1,7 +1,7 @@
 <?php
 /**
  * Singleton design pattern implementation for PHP5
- * http://snipplr.com/view/1982/php5-singleton-design-pattern/ 
+ * http://snipplr.com/view/1982/php5-singleton-design-pattern/
  */
 class apex{
     public static $loaded = array();
