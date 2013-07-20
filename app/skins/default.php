@@ -10,10 +10,13 @@
     <meta name="generator" content="Framework::Apex v1.4"/>
 
 
-    <? lib('html')->auto('css'); ?>
-
-    <? lib('html')->auto('js'); ?>
-
+    <?
+    lib('resources')->auto('css');
+    lib('resources')->auto('css/controllers');
+    lib('resources')->auto('js');
+    lib('resources')->auto('js/controllers');
+    lib('resources')->tags();
+    ?>
     <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
     <script type="text/javascript">
