@@ -13,10 +13,10 @@ class fuse extends RedBean_SimpleModel{
     function update(){
         $this->modified = microtime(true);
         if($this->new_bean == true){
-            $this->created_by = @lib('user')->bean();
+            $this->created_by = @lib('user')->id;
         }
         $this->modified = microtime(true);
-        $this->modified_by = @lib('user')->bean();
+        $this->modified_by = @lib('user')->id;
     }
     
     function sanitize_for_api_call(){
