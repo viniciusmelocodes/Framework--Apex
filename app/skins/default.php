@@ -21,6 +21,7 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
+        console.log('{mem_usage} | {elapsed_time}');
       });
     </script>
 
@@ -28,8 +29,5 @@
   </head>
   <body>
     <? include $template; ?>
-    <hr/>
-    <a target="_blank" href="http://www.phpapex.com/"><img style="border:0;" src="resources/media/poweredBy.gif"/></a>
-    {mem_usage} | {elapsed_time}
   </body>
 </html>
